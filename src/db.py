@@ -1,20 +1,9 @@
-import mysql.connector
-from flask import g
+from flask_sqlalchemy import SQLAlchemy
 
-def get_db():
-    if "db" not in g:
-        g.db = mysql.connector.connect(
-            host="localhost",
-            user="tu_usuario",
-            password="tu_password",
-            database="nombre_de_tu_db"
-        )
-    return g.db
-
-def close_db(e=None):
-    db = g.pop("db", None)
-    if db is not None:
-        db.close()
+db = SQLAlchemy()
 
 def init_db(app):
-    app.teardown_appcontext(close_db)
+    app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:Gonzi1212_@localhost/keyhole_db"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    
+    db.init_app(app)
