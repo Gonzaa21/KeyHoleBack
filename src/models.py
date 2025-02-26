@@ -1,7 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy
+from .db import db
 from sqlalchemy import Enum
-
-db = SQLAlchemy()
 
 # Tables of keyhole database
 class Calendar(db.Model):
